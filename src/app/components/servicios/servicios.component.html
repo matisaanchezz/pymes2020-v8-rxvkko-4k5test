@@ -1,4 +1,5 @@
 <div class="container">
+
 	<h3>{{Titulo}} <small>{{TituloAccionABMC[AccionABMC]}}</small> </h3>
 	<div id="divTablaResultados" *ngIf="AccionABMC == 'L'">
 		<table class="table table-bordered table-striped">
@@ -30,9 +31,7 @@
 	</div>
 
 	<form name="FormReg" [formGroup]='FormReg' *ngIf="AccionABMC != 'L'" class="bg-light">
-
 		<fieldset [disabled]="AccionABMC==='C'">
-
 			<!--campo descripcion-->
 			<div class="form-group row">
 				<label class="col-form-label col-sm-2 col-sm-offset-2" for="Descripcion">Descripcion <span
@@ -52,6 +51,41 @@
                 </span>
 				</div>
 			</div>
+
+			<!--campo importe-->
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2 col-sm-offset-2" for="Importe">Importe <span
+                    class="text-danger">*</span></label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" formControlName="Importe"
+         [ngClass]="{'is-invalid': (FormReg.controls.Importe.touched || submitted)  
+            && FormReg.controls.Importe.errors}" />
+
+					<span class="text-danger" *ngIf="(FormReg.controls.Importe.touched || submitted) 
+                        && FormReg.controls.Importe.errors?.required">
+                    Dato requerido.
+                </span>
+
+				</div>
+			</div>
+
+			<!--campo cantidadHoras-->
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2 col-sm-offset-2" for="CantidadHoras">CantidadHoras <span
+                    class="text-danger">*</span></label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" formControlName="CantidadHoras"
+         [ngClass]="{'is-invalid': (FormReg.controls.CantidadHoras.touched || submitted)  
+            && FormReg.controls.CantidadHoras.errors}" />
+
+					<span class="text-danger" *ngIf="(FormReg.controls.CantidadHoras.touched || submitted) 
+                        && FormReg.controls.CantidadHoras.errors?.required">
+                    Dato requerido.
+                </span>
+
+				</div>
+			</div>
+
 		</fieldset>
 
 		<!-- Botones Grabar, Cancelar/Volver' -->
@@ -65,4 +99,5 @@
         </button>
 		</div>
 	</form>
+
 </div>

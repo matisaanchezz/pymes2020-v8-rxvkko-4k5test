@@ -34,7 +34,10 @@ export class ServiciosComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(4), Validators.maxLength(50)]
       ],
-      Importe: [null, [Validators.required, Validators.pattern("[0-9]{1,7}")]],
+      Importe: [
+        null,
+        [Validators.required, Validators.pattern("[0-9]{1,7}[-.][0-9]{2}")]
+      ],
       CantidadHoras: [
         null,
         [Validators.required, Validators.pattern("[0-9]{1,7}")]
@@ -73,13 +76,11 @@ export class ServiciosComponent implements OnInit {
     const itemCopy = { ...this.FormReg.value };
 
     // agregar post
-    if (itemCopy.IdArticulo == 0 || itemCopy.IdArticulo == null) {
-      itemCopy.IdArticulo = 0;
-      this.ServicioService.post(itemCopy).subscribe((res: any) => {
-        this.Volver();
-        this.modalDialogService.Alert("Registro agregado correctamente.");
-        this.GetServicios();
-      });
-    }
+
+    this.ServicioService.post(itemCopy).subscribe((res: any) => {
+      this.Volver();
+      this.modalDialogService.Alert("Registro agregado correctamente.");
+      this.GetServicios();
+    });
   }
 }
